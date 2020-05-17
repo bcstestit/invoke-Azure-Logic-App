@@ -892,40 +892,20 @@ function run() {
             const verbose = core_1.getInput('verbose') === 'true';
             const log = new log_1.Logger(verbose);
             let url = core_1.getInput('url');
-            let method = core_1.getInput('method');
-            const rawInputHeaders = core_1.getInput('headers');
-            let data = core_1.getInput('data');
-            const graphql = core_1.getInput('graphql');
-            const variables = core_1.getInput('variables');
-            const operationName = core_1.getInput('operation_name');
-            let inputHeaders;
-            if (isDefined(rawInputHeaders)) {
-                inputHeaders = JSON.parse(rawInputHeaders);
-            }
-            else {
-                inputHeaders = {};
-            }
-            if (isDefined(graphql)) {
-                if (!isCustomURL(url)) {
-                    url = 'https://api.github.com/graphql';
-                }
-                method = 'POST';
-                data = graphql_1.graphqlPayloadFor(graphql, variables, operationName);
-                if (isEmpty(inputHeaders)) {
-                    inputHeaders = { 'Content-Type': 'application/json' };
-                }
-                log.info('graphql', graphql);
-                log.info('variables', variables);
-                if (isDefined(operationName)) {
-                    log.info('operation_name', operationName);
-                }
-            }
+            let approvers = core_1.getInput('approvers');
+            let instructions = core_1.getInput('instructions');
+            let inputHeaders = {'Content-Type': 'application/json'};
+	    let data = {'approvers': approvers, 'instructions': instructions}	
+	    let method = 'POST';	
+            
             log.info('url', url);
-            log.info('method', method);
-            log.info('headers', JSON.stringify(inputHeaders));
-            if (isDefined(data)) {
-                log.info('data', data);
+	    log.info('approvers', approvers);
+	    log.info('method', method);
+            if (isDefined(instructions)) {
+                log.info('instructions', instructions);
             }
+	    log.info('requestbody', data);			    
+	    		
             const [status, rawResponseHeaders, rawResponse] = yield http_1.request(url, method, data, inputHeaders);
             const responseHeaders = JSON.stringify(rawResponseHeaders);
             const response = JSON.stringify(rawResponse);
