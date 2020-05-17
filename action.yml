@@ -1,27 +1,15 @@
-name: "Watermelon HTTP client"
-description: "Perform HTTP requests within your workflow. Supports GraphQL!"
-author: "Camilo Garcia La Rotta"
+name: "Initiate Approval with Logic App"
+description: "Runs Azure Logic app for approvals"
+author: "test"
 inputs:
   url:
-    description: Endpoint to query
-    default: "https://api.github.com"
-  method:
-    description: HTTP method
-    default: get
-  headers:
-    description: HTTP custom headers
-  data:
+    description: Callback Url for Azure Logic App
+    required: true
+  approvers:
+    description: List of approvers
+    required: true
+  instructions:
     description: HTTP request payload
-  graphql:
-    description: GraphQL query or mutation to execute. If defined, the 'data' field is automatically populated with the this payload and the 'method' is set to POST
-  variables:
-    description: variables for a GraphQL mutation in JSON format
-    default: '{}'
-  operation_name:
-    description: name of the entrypoint GraphQL operation if multiple are defined in `graphql`
-  verbose:
-    description: wether to print info-level statements or not
-    default: false
 outputs:
   status:
     description: The status of the HTTP request
