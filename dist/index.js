@@ -899,8 +899,9 @@ function run() {
 	    let branchReference = process.env.GITHUB_REF;
 	    let requestingUser = `${process.env.GITHUB_ACTOR}`;
 	    let runId = `${process.env.GITHUB_WORKFLOW}` + '#' + `${process.env.GITHUB_RUN_NUMBER}`;
+	    let token = core_1.getInput('repo-token');
 		
-	    let data = {'approvers': approvers, 'instructions': instructions, 'repository': repositoryName, 'requester': requestingUser, 'RunId': runId, 'Branch': branchReference }	
+	    let data = {'approvers': approvers, 'instructions': instructions, 'repository': repositoryName, 'requester': requestingUser, 'RunId': runId, 'Branch': branchReference, 'Repo-Token': token }	
 	    let method = 'POST';	
             
             log.info('url', url);
