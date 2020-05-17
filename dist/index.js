@@ -895,7 +895,12 @@ function run() {
             let approvers = core_1.getInput('approvers');
             let instructions = core_1.getInput('instructions');
             let inputHeaders = {'Content-Type': 'application/json'};
-	    let data = {'approvers': approvers, 'instructions': instructions, 'repository': ${process.env.GITHUB_REPOSITORY}, 'requester': ${process.env.GITHUB_ACTOR}, 'RunId': ${process.env.GITHUB_RUN_ID}, 'Branch': ${process.env.GITHUB_REF} }	
+	    let repositoryName = ${process.env.GITHUB_REPOSITORY};
+	    let branchReference = ${process.env.GITHUB_REF};
+	    let requestingUser = ${process.env.GITHUB_ACTOR};
+	    let runId = ${process.env.GITHUB_RUN_ID};
+		
+	    let data = {'approvers': approvers, 'instructions': instructions, 'repository': repositoryName, 'requester': requestingUser, 'RunId': runId, 'Branch': branchReference }	
 	    let method = 'POST';	
             
             log.info('url', url);
