@@ -8,6 +8,9 @@ inputs:
   approvers:
     description: List of approvers
     required: true
+  repo-token:
+    description: Repository token to make a callback event on completion of approval
+    required: true
   instructions:
     description: HTTP request payload
 outputs:
